@@ -3,7 +3,8 @@
 
   <div class="row">
     <div *ngFor="let rental of rentals" class="col-md-3 col-xs-12">
-      <app-rental-card [rental]="rental"></app-rental-card>
+      Parent :{{parentData}}
+      <app-rental-card [rental]="rental" [childData]="parentData" (childDataChange)="changeParentData($event)"></app-rental-card>
     </div>
   </div>
 </div>

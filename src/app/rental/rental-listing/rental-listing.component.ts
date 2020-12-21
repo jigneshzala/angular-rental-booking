@@ -15,6 +15,7 @@ export class RentalListingComponent implements OnInit, IRental {
   rentals: Rental[] = [];
   someData = "Some Data1";
   isLoaded = false;
+  parentData = 10;
 
   ngOnInit() {
     const appStorage = new AppStorage<string>();
@@ -28,6 +29,10 @@ export class RentalListingComponent implements OnInit, IRental {
     this.rentalService.getRentals().subscribe((rentals: Rental[]) => {
       this.rentals = rentals;
     });
+  }
+
+  changeParentData(value: number) {
+    this.parentData = value;
   }
 
   implementMe() {
