@@ -3,14 +3,8 @@
 
   <div class="row">
     <div *ngFor="let rental of rentals" class="col-md-3 col-xs-12">
-      Parent :{{parentData}}
-      <app-rental-card [rental]="rental" [(childData)]="parentData"></app-rental-card>
-      <!-- 2 way data binding is transformed into this -->
-      <!-- <bwm-rental-card 
-          [rental]="rental"
-          [childData]="parentData"
-          (childDataChange)="parentData = $event">
-        </bwm-rental-card> -->
+
+      <app-rental-card [rental]="rental"></app-rental-card>
     </div>
   </div>
 </div>

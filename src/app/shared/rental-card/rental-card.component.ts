@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from "@angular/core";
+import { Component, Input } from "@angular/core";
 
 @Component({
   selector: "app-rental-card",
@@ -7,12 +7,5 @@ import { Component, Input, Output, EventEmitter } from "@angular/core";
 })
 export class RentalCardComponent {
   @Input("rental") rental;
-  @Input("childData") childData;
 
-  @Output() childDataChange = new EventEmitter<number>();
-
-  changeData() {
-    this.childData = 100;
-    this.childDataChange.emit(this.childData);
-  }
 }

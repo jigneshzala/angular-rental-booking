@@ -67,4 +67,11 @@ export class RentalService {
       }, 100);
     });
   }
+
+  getRentalById(rentalId: string): Observable<Rental> {
+    return new Observable((observer) => {
+      const rental = this.rentals.find((rental) => rental._id === rentalId);
+      setTimeout(() => observer.next(rental), 100);
+    });
+  }
 }
