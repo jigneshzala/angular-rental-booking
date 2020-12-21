@@ -1,14 +1,19 @@
 const express = require("express");
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const config = require('./config/dev');
 
+// routes
 const rentalRoutes = require('./routes/rentals');
+
+// models
+const Rental = require('./models/rental');
 
 const app = express();
 
 const PORT = process.env.PORT || 3001;
 
-mongoose.connect('mongodb+srv://jigar:test1234@cluster0.c491r.mongodb.net/rental-booking?retryWrites=true&w=majority', {
+mongoose.connect(config.DB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }, () => {
