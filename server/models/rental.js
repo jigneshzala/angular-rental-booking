@@ -14,6 +14,7 @@ const rentalSchema = new Schema({
   },
   street: {
     type: String,
+    lowercase: true,
     required: true,
     minlength: [4, 'Invalid length! Minimum is 4 characters']
   },
