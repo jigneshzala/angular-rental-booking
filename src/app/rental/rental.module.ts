@@ -11,8 +11,10 @@ import {
   UppercasePipe,
   FirstUpperLetterPipe,
 } from "../shared/pipes/uppercase.pipe";
-import { HighlightDirective } from '../shared/directives/custom.directive';
-
+import {
+  HighlightDirective,
+  BwmNgIfDirective,
+} from "../shared/directives/custom.directive";
 
 import { RentalService } from "./shared/rental.service";
 
@@ -40,7 +42,8 @@ const routes: Routes = [
     RentalCardComponent,
     UppercasePipe,
     FirstUpperLetterPipe,
-    HighlightDirective
+    HighlightDirective,
+    BwmNgIfDirective,
   ],
   providers: [RentalService],
   imports: [RouterModule.forChild(routes), CommonModule],
