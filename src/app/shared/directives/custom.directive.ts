@@ -5,6 +5,7 @@ import {
   OnInit,
   ViewContainerRef,
   TemplateRef,
+  OnChanges,
 } from "@angular/core";
 
 @Directive({
@@ -40,4 +41,23 @@ export class BwmNgIfDirective {
     private container: ViewContainerRef,
     private template: TemplateRef<any>
   ) {}
+}
+
+@Directive({
+  selector: "[bwmNgFor]",
+})
+export class BwmNgForDirective implements OnChanges {
+  @Input("bwmNgForOf") bwmNgForOf: Array<any>;
+
+  constructor(
+    private container: ViewContainerRef,
+    private template: TemplateRef<any>
+  ) {}
+
+  ngOnChanges() {
+    this.bwmNgForOf.forEach((value) => {
+      debugger;
+      this.container.createEmbeddedView(this.template, { $implicit: value });
+    });
+  }
 }

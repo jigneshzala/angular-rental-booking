@@ -14,6 +14,7 @@ import {
 import {
   HighlightDirective,
   BwmNgIfDirective,
+  BwmNgForDirective,
 } from "../shared/directives/custom.directive";
 
 import { RentalService } from "./shared/rental.service";
@@ -44,6 +45,7 @@ const routes: Routes = [
     FirstUpperLetterPipe,
     HighlightDirective,
     BwmNgIfDirective,
+    BwmNgForDirective,
   ],
   providers: [RentalService],
   imports: [RouterModule.forChild(routes), CommonModule],
