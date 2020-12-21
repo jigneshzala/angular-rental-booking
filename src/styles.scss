@@ -22,3 +22,17 @@ p {
     margin-bottom: 20px;
   }
 }
+
+.type {
+  &-apartment {
+    color: #a72da3 !important;
+  }
+
+  &-condo {
+    color: #d68000 !important;
+  }
+
+  &-house {
+    color: #bf1818 !important;
+  }
+}
