@@ -46,9 +46,16 @@ p {
   &:focus,
   &:active {
     background-color: $dark-red-color;
-    ;
+
     border-color: $dark-red-color;
     color: white;
     box-shadow: none;
+  }
+
+  &:disabled {
+    cursor: auto;
+    background-color: transparent;
+    color: $dark-red-color;
+
   }
 }
