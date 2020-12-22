@@ -6,7 +6,10 @@ import {
   AbstractControl,
 } from "@angular/forms";
 
-import { forbiddenEmailValidator } from "../../shared/validators/functions";
+import {
+  forbiddenEmailValidator,
+  sameAsValidator,
+} from "../../shared/validators/functions";
 
 @Component({
   selector: "app-login",
@@ -36,6 +39,17 @@ export class LoginComponent implements OnInit {
       password: ["", [Validators.required, Validators.minLength(6)]],
     });
   }
+
+  // initForm() {
+  //   this.loginForm = this.fb.group({
+  //     email: ['', [
+  //       Validators.required,
+  //       Validators.pattern(this.emailPattern),
+  //       forbiddenEmailValidator('jerga99@gmail.com')
+  //     ]],
+  //     password: ['', [Validators.required, Validators.minLength(6)]]
+  //   }, {validators: [sameAsValidator(['password', 'email'])]});
+  // }
 
   login() {
     if (this.loginForm.invalid) {
