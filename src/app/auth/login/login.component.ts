@@ -6,6 +6,8 @@ import {
   AbstractControl,
 } from "@angular/forms";
 
+import { forbiddenEmailValidator } from "../../shared/validators/functions";
+
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
@@ -23,7 +25,14 @@ export class LoginComponent implements OnInit {
 
   initForm() {
     this.loginForm = this.fb.group({
-      email: ["", [Validators.required, Validators.pattern(this.emailPattern)]],
+      email: [
+        "",
+        [
+          Validators.required,
+          Validators.pattern(this.emailPattern),
+          forbiddenEmailValidator("test@gmail.com"),
+        ],
+      ],
       password: ["", [Validators.required, Validators.minLength(6)]],
     });
   }
