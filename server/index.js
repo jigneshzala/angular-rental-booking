@@ -2,12 +2,18 @@ const express = require("express");
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const config = require('./config/dev');
+const {
+  provideErrorHandler
+} = require('./middlewares');
+
 
 // routes
 const rentalRoutes = require('./routes/rentals');
 const usersRoutes = require('./routes/users');
 
-const { onlyAuthUser } = require('./controllers/users');
+const {
+  onlyAuthUser
+} = require('./controllers/users');
 
 
 // models
@@ -28,10 +34,13 @@ mongoose.connect(config.DB_URI, {
 
 // Middleware
 app.use(bodyParser.json());
+app.use(provideErrorHandler);
 
 app.get('/api/v1/secret', onlyAuthUser, (req, res) => {
   const user = res.locals.user
-  return res.json({message: `Super secret message to: ${user.username}`})
+  return res.json({
+    message: `Super secret message to: ${user.username}`
+  })
 })
 
 // Api Routes
