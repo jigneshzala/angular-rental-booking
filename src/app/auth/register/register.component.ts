@@ -29,7 +29,9 @@ export class RegisterComponent implements OnInit {
     this.errors = [];
     this.auth.register(this.registerFormData).subscribe(
       (_) => {
-        this.router.navigate(["/login"]);
+        this.router.navigate(["/login"], {
+          queryParams: { message: "You have been succesfuly registered!" },
+        });
       },
       (errors: BwmApi.Error[]) => {
         this.errors = errors;
