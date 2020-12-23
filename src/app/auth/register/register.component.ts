@@ -26,13 +26,13 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
+    this.errors = [];
     this.auth.register(this.registerFormData).subscribe(
       (_) => {
         this.router.navigate(["/login"]);
       },
-      (errors) => {
+      (errors: BwmApi.Error[]) => {
         this.errors = errors;
-        console.log(errors);
       }
     );
   }
