@@ -7,6 +7,9 @@ const config = require('./config/dev');
 const rentalRoutes = require('./routes/rentals');
 const usersRoutes = require('./routes/users');
 
+const { onlyAuthUser } = require('./controllers/users');
+
+
 // models
 require('./models/rental');
 require('./models/user');
@@ -25,6 +28,11 @@ mongoose.connect(config.DB_URI, {
 
 // Middleware
 app.use(bodyParser.json());
+
+app.get('/api/v1/secret', onlyAuthUser, (req, res) => {
+  const user = res.locals.user
+  return res.json({message: `Super secret message to: ${user.username}`})
+})
 
 // Api Routes
 app.use('/api/v1/rentals', rentalRoutes);
