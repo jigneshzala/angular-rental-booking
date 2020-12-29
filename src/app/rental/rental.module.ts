@@ -7,6 +7,8 @@ import { RentalDetailComponent } from "./rental-detail/rental-detail.component";
 import { RentalListingComponent } from "./rental-listing/rental-listing.component";
 import { RentalComponent } from "./rental.component";
 import { RentalCardComponent } from "../shared/rental-card/rental-card.component";
+import { RentalSecretComponent } from "./rental-secret/rental-secret.component";
+import { AuthGuard } from "../auth/shared/auth.guard";
 
 import {
   UppercasePipe,
@@ -30,6 +32,11 @@ const routes: Routes = [
         component: RentalListingComponent,
       },
       {
+        path: "secret",
+        component: RentalSecretComponent,
+        canActivate: [AuthGuard],
+      },
+      {
         path: ":rentalId",
         component: RentalDetailComponent,
       },
@@ -47,6 +54,7 @@ const routes: Routes = [
     HighlightDirective,
     BwmNgIfDirective,
     BwmNgForDirective,
+    RentalSecretComponent,
   ],
   providers: [RentalService],
   imports: [RouterModule.forChild(routes), CommonModule, HttpClientModule],
