@@ -5,6 +5,7 @@ import { Observable, throwError } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 import { exctractApiError } from "src/app/shared/helpers/functions";
 import { JwtHelperService } from "@auth0/angular-jwt";
+import * as moment from "moment";
 
 const jwt = new JwtHelperService();
 
@@ -13,6 +14,9 @@ class DecodedToken {
   username: string = "";
   userId: string = "";
 }
+
+// '16:36' < '18:36' - not expired!
+// '16:36' < '15:36' - expired!
 @Injectable({
   providedIn: "root",
 })
@@ -56,5 +60,17 @@ export class AuthService {
 
     localStorage.setItem("bwm_auth_token", token);
     return token;
+  }
+
+  get isAuthenticated(): boolean {
+    return moment().isBefore(this.expiration);
+  }
+
+  get username(): string {
+    return this.decodedToken.username;
+  }
+
+  private get expiration() {
+    return moment.unix(this.decodedToken.exp);
   }
 }
