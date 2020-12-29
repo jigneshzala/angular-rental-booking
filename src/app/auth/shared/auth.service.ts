@@ -50,8 +50,12 @@ export class AuthService {
     );
   }
 
+  logout() {
+    localStorage.removeItem("bwm_auth_token");
+    this.decodedToken = new DecodedToken();
+  }
+
   checkAuthentication(): boolean {
-    
     const authToken = localStorage.getItem("bwm_auth_token");
     if (!authToken) {
       return false;
