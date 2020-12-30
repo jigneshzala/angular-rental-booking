@@ -9,6 +9,8 @@ import { map } from "rxjs/operators";
   encapsulation: ViewEncapsulation.None,
 })
 export class MapComponent implements OnInit {
+  private map: any;
+
   @Input("location") set location(location: string) {
     this.createMap();
     this.getGeoLocation(location);
@@ -19,19 +21,19 @@ export class MapComponent implements OnInit {
   ngOnInit() {}
 
   private createMap() {
-    const map = tt.map({
+    this.map = tt.map({
       key: this.mapService.API_KEY,
       container: "bwm-map",
       style: "tomtom://vector/1/basic-main",
+      zoom: 15,
     });
 
-    map.addControl(new tt.NavigationControl());
+    this.map.addControl(new tt.NavigationControl());
   }
 
   private getGeoLocation(location: string) {
-    this.mapService.requestGeoLocation(location).subscribe((ttRes) => {
-      
-      console.log(ttRes);
+    this.mapService.requestGeoLocation(location).subscribe((position) => {
+      this.map.setCenter(new tt.LngLat(position.lon, position.lat));
     });
   }
 }
