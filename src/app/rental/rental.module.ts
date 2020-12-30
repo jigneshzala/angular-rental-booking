@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
+import { MapModule } from "../shared/modules/map/map.module";
 
 import { RentalDetailComponent } from "./rental-detail/rental-detail.component";
 import { RentalListingComponent } from "./rental-listing/rental-listing.component";
@@ -21,6 +22,7 @@ import {
 } from "../shared/directives/custom.directive";
 
 import { RentalService } from "./shared/rental.service";
+
 
 const routes: Routes = [
   {
@@ -57,6 +59,6 @@ const routes: Routes = [
     RentalSecretComponent,
   ],
   providers: [RentalService],
-  imports: [RouterModule.forChild(routes), CommonModule, HttpClientModule],
+  imports: [RouterModule.forChild(routes), CommonModule, HttpClientModule,MapModule],
 })
 export class RentalModule {}
