@@ -26,6 +26,7 @@ export class MapComponent implements OnInit {
       container: "bwm-map",
       style: "tomtom://vector/1/basic-main",
       zoom: 15,
+      scrollZoom: false,
     });
 
     this.map.addControl(new tt.NavigationControl());
@@ -34,6 +35,15 @@ export class MapComponent implements OnInit {
   private getGeoLocation(location: string) {
     this.mapService.requestGeoLocation(location).subscribe((position) => {
       this.map.setCenter(new tt.LngLat(position.lon, position.lat));
+
+      const markerDiv = document.createElement("div");
+      markerDiv.className = "bwm-marker";
+
+      new tt.Marker({
+        element: markerDiv,
+      })
+        .setLngLat([position.lon, position.lat])
+        .addTo(this.map);
     });
   }
 }
