@@ -33,17 +33,29 @@ export class MapComponent implements OnInit {
   }
 
   private getGeoLocation(location: string) {
-    this.mapService.requestGeoLocation(location).subscribe((position) => {
-      this.map.setCenter(new tt.LngLat(position.lon, position.lat));
+    this.mapService.requestGeoLocation(location).subscribe(
+      (position) => {
+        this.map.setCenter(new tt.LngLat(position.lon, position.lat));
 
-      const markerDiv = document.createElement("div");
-      markerDiv.className = "bwm-marker";
+        const markerDiv = document.createElement("div");
+        markerDiv.className = "bwm-marker";
 
-      new tt.Marker({
-        element: markerDiv,
-      })
-        .setLngLat([position.lon, position.lat])
-        .addTo(this.map);
-    });
+        new tt.Marker({
+          element: markerDiv,
+        })
+          .setLngLat([position.lon, position.lat])
+          .addTo(this.map);
+      },
+      (error: Error) => {
+        new tt.Popup({
+          className: "bwm-popup",
+          closeButton: false,
+          closeOnClick: false,
+        })
+          .setLngLat(new tt.LngLat(0, 0))
+          .setHTML(`<p>${error.message}</p>`)
+          .addTo(this.map);
+      }
+    );
   }
 }
