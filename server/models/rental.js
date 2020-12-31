@@ -40,6 +40,10 @@ const rentalSchema = new Schema({
     required: true
   },
   shared: Boolean,
+  owner: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
   createdAt: {
     type: Date,
     default: Date.now
