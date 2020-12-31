@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { Moment } from "moment";
 import { Booking } from "src/app/booking/shared/booking.model";
+import { Rental } from "../../shared/rental.model";
 
 @Component({
   selector: "app-rental-booking",
@@ -9,6 +10,8 @@ import { Booking } from "src/app/booking/shared/booking.model";
 })
 export class RentalBookingComponent implements OnInit {
   @Input("isAuth") isAuth = false;
+  @Input("rental") rental: Rental;
+
   newBooking: Booking;
   calendar: { startDate: Moment; endDate: Moment };
   locale = {
@@ -29,11 +32,25 @@ export class RentalBookingComponent implements OnInit {
     if (!startDate || !endDate) {
       return;
     }
+    if (startDate.isSame(endDate, "days")) {
+      alert("Invalid Dates!");
+      this.calendar = null;
+    }
 
     this.newBooking.startAt = startDate.format();
     this.newBooking.endAt = endDate.format();
+    this.newBooking.nights = endDate.diff(startDate, "days");
+    this.newBooking.price = this.newBooking.nights * this.rental.dailyPrice;
   }
 
+  get canOpenConfirmation() {
+    return (
+      this.newBooking.startAt &&
+      this.newBooking.endAt &&
+      this.newBooking.guests &&
+      this.newBooking.guests > 0
+    );
+  }
   reservePlace() {
     alert(JSON.stringify(this.newBooking));
   }
