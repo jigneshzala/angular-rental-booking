@@ -22,7 +22,7 @@ import {
 } from "../shared/directives/custom.directive";
 
 import { RentalService } from "./shared/rental.service";
-
+import { RentalNewComponent } from "./rental-new/rental-new.component";
 
 const routes: Routes = [
   {
@@ -36,6 +36,11 @@ const routes: Routes = [
       {
         path: "secret",
         component: RentalSecretComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: "new",
+        component: RentalNewComponent,
         canActivate: [AuthGuard],
       },
       {
@@ -57,8 +62,14 @@ const routes: Routes = [
     BwmNgIfDirective,
     BwmNgForDirective,
     RentalSecretComponent,
+    RentalNewComponent,
   ],
   providers: [RentalService],
-  imports: [RouterModule.forChild(routes), CommonModule, HttpClientModule,MapModule],
+  imports: [
+    RouterModule.forChild(routes),
+    CommonModule,
+    HttpClientModule,
+    MapModule,
+  ],
 })
 export class RentalModule {}
