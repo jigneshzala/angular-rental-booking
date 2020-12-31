@@ -23,6 +23,7 @@ import {
 
 import { RentalService } from "./shared/rental.service";
 import { RentalNewComponent } from "./rental-new/rental-new.component";
+import { RentalBookingComponent } from './components/rental-booking/rental-booking.component';
 
 const routes: Routes = [
   {
@@ -63,6 +64,7 @@ const routes: Routes = [
     BwmNgForDirective,
     RentalSecretComponent,
     RentalNewComponent,
+    RentalBookingComponent,
   ],
   providers: [RentalService],
   imports: [

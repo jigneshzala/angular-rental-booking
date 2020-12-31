@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { RentalService } from "../shared/rental.service";
 import { Rental } from "../shared/rental.model";
+import { AuthService } from "src/app/auth/shared/auth.service";
 
 @Component({
   selector: "app-rental-detail",
@@ -14,7 +15,8 @@ export class RentalDetailComponent implements OnInit {
   // dependency injection
   constructor(
     private route: ActivatedRoute,
-    private rentalService: RentalService
+    private rentalService: RentalService,
+    private auth: AuthService
   ) {}
 
   ngOnInit() {
@@ -28,6 +30,6 @@ export class RentalDetailComponent implements OnInit {
   }
 
   get rentalLocation(): string {
-    return `${this.rental.city}, ${this.rental.street}`
+    return `${this.rental.city}, ${this.rental.street}`;
   }
 }
