@@ -4,6 +4,7 @@ import { Booking } from "src/app/booking/shared/booking.model";
 import { Rental } from "../../shared/rental.model";
 import { NgxSmartModalService } from "ngx-smart-modal";
 import { TimeService } from "src/app/shared/services/time.service";
+import { BookingService } from "src/app/booking/shared/booking.service";
 
 @Component({
   selector: "app-rental-booking",
@@ -20,12 +21,25 @@ export class RentalBookingComponent implements OnInit {
     format: "YYYY/MM/DD",
   };
   constructor(
+    private bookingService: BookingService,
     public timeService: TimeService,
     public modalService: NgxSmartModalService
   ) {}
 
   ngOnInit() {
     this.initBooking();
+  }
+
+  reservePlace() {
+    this.newBooking.rental = { ...this.rental };
+    this.bookingService.createBooking(this.newBooking).subscribe(
+      (savedBooking) => {
+        alert("Huray! Booking created!");
+      },
+      (error) => {
+        alert("WE cannot make booking!");
+      }
+    );
   }
 
   initBooking() {
@@ -63,8 +77,5 @@ export class RentalBookingComponent implements OnInit {
       this.newBooking.guests &&
       this.newBooking.guests > 0
     );
-  }
-  reservePlace() {
-    alert(JSON.stringify(this.newBooking));
   }
 }
