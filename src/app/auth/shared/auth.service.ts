@@ -83,6 +83,9 @@ export class AuthService {
     return token;
   }
 
+  get authToken(): string {
+    return localStorage.getItem("bwm_auth_token") || "";
+  }
   get isAuthenticated(): boolean {
     return moment().isBefore(this.expiration);
   }
