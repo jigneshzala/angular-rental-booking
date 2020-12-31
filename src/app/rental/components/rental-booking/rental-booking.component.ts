@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from "@angular/core";
 import { Moment } from "moment";
 import { Booking } from "src/app/booking/shared/booking.model";
 import { Rental } from "../../shared/rental.model";
+import { NgxSmartModalService } from "ngx-smart-modal";
 
 @Component({
   selector: "app-rental-booking",
@@ -17,7 +18,7 @@ export class RentalBookingComponent implements OnInit {
   locale = {
     format: "YYYY/MM/DD",
   };
-  constructor() {}
+  constructor(public modalService: NgxSmartModalService) {}
 
   ngOnInit() {
     this.initBooking();
@@ -41,6 +42,10 @@ export class RentalBookingComponent implements OnInit {
     this.newBooking.endAt = endDate.format();
     this.newBooking.nights = endDate.diff(startDate, "days");
     this.newBooking.price = this.newBooking.nights * this.rental.dailyPrice;
+  }
+
+  openConfirmationModal() {
+    this.modalService.getModal("confirmationModal").open();
   }
 
   get canOpenConfirmation() {
