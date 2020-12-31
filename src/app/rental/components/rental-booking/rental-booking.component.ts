@@ -5,6 +5,7 @@ import { Rental } from "../../shared/rental.model";
 import { NgxSmartModalService } from "ngx-smart-modal";
 import { TimeService } from "src/app/shared/services/time.service";
 import { BookingService } from "src/app/booking/shared/booking.service";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: "app-rental-booking",
@@ -15,6 +16,7 @@ export class RentalBookingComponent implements OnInit {
   @Input("isAuth") isAuth = false;
   @Input("rental") rental: Rental;
 
+  errors: BwmApi.Error[] = [];
   newBooking: Booking;
   calendar: { startDate: Moment; endDate: Moment };
   madeBookings: string[] = [];
@@ -23,6 +25,7 @@ export class RentalBookingComponent implements OnInit {
     format: "YYYY/MM/DD",
   };
   constructor(
+    private toastr: ToastrService,
     private bookingService: BookingService,
     public timeService: TimeService,
     public modalService: NgxSmartModalService
@@ -39,16 +42,20 @@ export class RentalBookingComponent implements OnInit {
 
   reservePlace() {
     this.newBooking.rental = { ...this.rental };
+    this.errors = [];
     this.bookingService.createBooking(this.newBooking).subscribe(
       (savedBooking) => {
-        alert("Huray! Booking created!");
+        this.toastr.success("Booking has been created!", "Booking", {
+          timeOut: 3000,
+          closeButton: true,
+        });
         this.addBookedOutDates(savedBooking.startAt, savedBooking.endAt);
         this.calendar = null;
         this.initBooking();
         this.modal.close();
       },
-      (error) => {
-        alert("WE cannot make booking!");
+      (errors) => {
+        this.errors = errors;
       }
     );
   }
@@ -80,7 +87,7 @@ export class RentalBookingComponent implements OnInit {
     );
   };
 
-  private openConfirmationModal() {
+  openConfirmationModal() {
     this.modal.open();
   }
 
