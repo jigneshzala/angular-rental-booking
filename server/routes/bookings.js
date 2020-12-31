@@ -4,9 +4,13 @@ const {
   createBooking
 } = require('../controllers/bookings');
 const {
+  isUserRentalOwner
+} = require('../controllers/rentals');
+
+const {
   onlyAuthUser
 } = require('../controllers/users');
 
-router.post('', onlyAuthUser, createBooking);
+router.post('', onlyAuthUser, isUserRentalOwner, createBooking);
 
 module.exports = router;
