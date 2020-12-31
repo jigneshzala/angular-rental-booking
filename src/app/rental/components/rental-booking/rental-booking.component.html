@@ -6,18 +6,18 @@
   <ng-container *ngIf="isAuth">
     <form>
       <label>Dates</label>
-      <input type="text" ngxDaterangepickerMd name="daterange" [locale]="locale" [(ngModel)]="selected"
-        class="form-control" />
+      <input type="text" ngxDaterangepickerMd name="daterange" [locale]="locale" [(ngModel)]="calendar"
+        (datesUpdated)="updateBookingDates($event)" class="form-control" />
       <div class="form-group">
         <label for="guests">Guests</label>
-        <!-- TODO: bind to newBooking.guests -->
-        <input type="number" class="form-control" id="guests">
+
+        <input [(ngModel)]="newBooking.guests" min="1" type="number" class="form-control" id="guests" name="guests">
       </div>
     </form>
     <button (click)="reservePlace()" class="btn btn-danger btn-confirm btn-block">Reserve place now</button>
     <hr>
   </ng-container>
-  <!-- TODO: if is NOT authenticated -->
+
   <div *ngIf="!isAuth" class="should-login">
     <a class="btn bwm-btn-main" routerLink="/login">Login and book this place today</a>
   </div>
