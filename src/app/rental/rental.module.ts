@@ -2,7 +2,6 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
 import { MapModule } from "../shared/modules/map/map.module";
 
 import { RentalDetailComponent } from "./rental-detail/rental-detail.component";
@@ -69,7 +68,6 @@ const routes: Routes = [
   imports: [
     RouterModule.forChild(routes),
     CommonModule,
-    HttpClientModule,
     MapModule,
     FormsModule,
   ],
