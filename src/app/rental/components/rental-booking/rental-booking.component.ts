@@ -35,6 +35,9 @@ export class RentalBookingComponent implements OnInit {
     this.bookingService.createBooking(this.newBooking).subscribe(
       (savedBooking) => {
         alert("Huray! Booking created!");
+        this.calendar = null;
+        this.initBooking();
+        this.modal.close();
       },
       (error) => {
         alert("WE cannot make booking!");
@@ -67,7 +70,11 @@ export class RentalBookingComponent implements OnInit {
   };
 
   openConfirmationModal() {
-    this.modalService.getModal("confirmationModal").open();
+    this.modal.open();
+  }
+
+  get modal() {
+    return this.modalService.getModal("confirmationModal");
   }
 
   get canOpenConfirmation() {
