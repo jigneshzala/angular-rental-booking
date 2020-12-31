@@ -18,6 +18,10 @@ export class TokenInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    if (request.url.includes("api.tomtom.com")) {
+      return next.handle(request);
+    }
+
     const token = this.auth.authToken;
 
     if (token) {
