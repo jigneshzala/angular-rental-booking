@@ -6,8 +6,8 @@
   <ng-container *ngIf="isAuth">
     <form>
       <label>Dates</label>
-      <input type="text" ngxDaterangepickerMd name="daterange" [locale]="locale" [(ngModel)]="calendar"
-        (datesUpdated)="updateBookingDates($event)" class="form-control" />
+      <input type="text" ngxDaterangepickerMd name="daterange" [isInvalidDate]="checkIfDateIsInvalid" [locale]="locale"
+        [(ngModel)]="calendar" (datesUpdated)="updateBookingDates($event)" class="form-control" />
       <div class="form-group">
         <label for="guests">Guests</label>
 
@@ -30,7 +30,8 @@
 
 <ngx-smart-modal #confirmationModal identifier="confirmationModal">
   <div class="modal-header">
-    <h4 class="modal-title">Confirm Booking <p>{{newBooking.startAt}} to {{newBooking.endAt}}</p>
+    <h4 class="modal-title">Confirm Booking
+      <p>{{timeService.format(newBooking.startAt)}} to {{timeService.format(newBooking.endAt)}}</p>
     </h4>
     <button type="button" class="close" aria-label="Close" (click)="confirmationModal.close()">
     </button>
