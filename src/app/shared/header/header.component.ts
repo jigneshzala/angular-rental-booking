@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-header",
@@ -10,7 +11,13 @@ export class HeaderComponent implements OnInit {
   @Input("username") username = "";
   @Input("logout") logout = () => {};
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit() {}
+
+  search(city: string) {
+    city
+      ? this.router.navigate([`/rentals/${city}/homes`])
+      : this.router.navigate(["/rentals"]);
+  }
 }
