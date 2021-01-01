@@ -26,6 +26,7 @@ import {
 import { RentalService } from "./shared/rental.service";
 import { RentalNewComponent } from "./rental-new/rental-new.component";
 import { RentalBookingComponent } from "./components/rental-booking/rental-booking.component";
+import { RentalHomesComponent } from "./rental-homes/rental-homes.component";
 
 const routes: Routes = [
   {
@@ -45,6 +46,10 @@ const routes: Routes = [
         path: "new",
         component: RentalNewComponent,
         canActivate: [AuthGuard],
+      },
+      {
+        path: ":city/homes",
+        component: RentalHomesComponent,
       },
       {
         path: ":rentalId",
@@ -67,6 +72,7 @@ const routes: Routes = [
     RentalSecretComponent,
     RentalNewComponent,
     RentalBookingComponent,
+    RentalHomesComponent,
   ],
   providers: [RentalService],
   imports: [
