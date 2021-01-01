@@ -8,7 +8,7 @@ import { RentalService } from "src/app/rental/shared/rental.service";
   styleUrls: ["./manage-rentals.component.scss"],
 })
 export class ManageRentalsComponent implements OnInit {
-  rentals: Rental[] = [];
+  rentals: Rental[];
 
   constructor(private rentalService: RentalService) {}
 
@@ -24,7 +24,15 @@ export class ManageRentalsComponent implements OnInit {
       return;
     }
 
-    alert(`Deleting rental with id: ${rentalId}`);
+    this.rentalService.deleteRental(rentalId).subscribe(
+      (_) => {
+        const index = this.rentals.findIndex((r) => r._id === rentalId);
+        this.rentals.splice(index, 1);
+
+        alert("Rental has been deleted!");
+      },
+      (_) => alert("Rental cannot be deleted!")
+    );
   }
 
   private askForPermission(): boolean {

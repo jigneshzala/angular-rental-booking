@@ -34,4 +34,8 @@ export class RentalService {
         )
       );
   }
+
+  deleteRental(rentalId: string): Observable<any> {
+    return this.http.delete(`/api/v1/rentals/${rentalId}`);
+  }
 }
