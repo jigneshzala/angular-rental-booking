@@ -9,6 +9,7 @@ const {
   createRental
 } = require('../controllers/rentals');
 
+// /api/v1/rentals?city="berlin"
 router.get('', getRentals);
 router.get('/:rentalId', getRentalById);
 router.post('', onlyAuthUser, createRental);
