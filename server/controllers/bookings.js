@@ -1,4 +1,5 @@
 const Booking = require('../models/booking');
+const Rental = require('../models/rental');
 const moment = require('moment');
 
 exports.getBookings = async (req, res) => {
@@ -17,6 +18,30 @@ exports.getBookings = async (req, res) => {
   }
 }
 
+///api/v1/bookings/received
+exports.getReceivedBookings = async (req, res) => {
+  const {
+    user
+  } = res.locals;
+
+  try {
+    const rentals = await Rental.find({
+      owner: user
+    }, '_id');
+    const rentalIds = rentals.map(r => r.id);
+    const bookings = await Booking
+      .find({
+        rental: {
+          $in: rentalIds
+        }
+      })
+      .populate('user', '-password')
+      .populate('rental');
+    return res.json(bookings);
+  } catch (error) {
+    return res.mongoError(error);
+  }
+}
 exports.getUserBookings = async (req, res) => {
   const {
     user
