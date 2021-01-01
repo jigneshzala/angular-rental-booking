@@ -78,7 +78,6 @@ exports.deleteBooking = async (req, res) => {
       });
     }
 
-    const dayDiff = moment(booking.startAt).diff(moment(), 'days');
 
     if (moment(booking.startAt).diff(moment(), 'days') > DAYS_THRESHOLD) {
       await booking.remove();
