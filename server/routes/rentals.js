@@ -6,11 +6,13 @@ const {
 const {
   getRentals,
   getRentalById,
-  createRental
+  createRental,
+  getUserRentals
 } = require('../controllers/rentals');
 
 // /api/v1/rentals?city="berlin"
 router.get('', getRentals);
+router.get('/me', onlyAuthUser, getUserRentals);
 router.get('/:rentalId', getRentalById);
 router.post('', onlyAuthUser, createRental);
 
