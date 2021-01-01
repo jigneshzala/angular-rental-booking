@@ -35,18 +35,19 @@ exports.createRental = (req, res) => {
   const rentalData = req.body;
   rentalData.owner = res.locals.user;
 
-
   Rental.create(rentalData, (error, createdRental) => {
     if (error) {
       return res.mongoError(error);
     }
 
     return res.json(createdRental);
-
-  });
+  })
 }
 
+
+
 // middlewares
+
 exports.isUserRentalOwner = (req, res, next) => {
   const {
     rental

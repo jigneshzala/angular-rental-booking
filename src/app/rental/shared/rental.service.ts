@@ -18,6 +18,9 @@ export class RentalService {
     return this.http.get<Rental[]>(`/api/v1/rentals`);
   }
 
+  getRentalsByCity(city: string): Observable<Rental[]> {
+    return this.http.get<Rental[]>(`/api/v1/rentals?city=${city}`);
+  }
   createRental(newRental: Rental): Observable<Rental> {
     return this.http
       .post<Rental>("/api/v1/rentals", newRental)
