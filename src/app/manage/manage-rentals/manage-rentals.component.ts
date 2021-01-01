@@ -17,4 +17,17 @@ export class ManageRentalsComponent implements OnInit {
       this.rentals = rentals;
     });
   }
+
+  deleteRental(rentalId: string) {
+    const canDelete = this.askForPermission();
+    if (!canDelete) {
+      return;
+    }
+
+    alert(`Deleting rental with id: ${rentalId}`);
+  }
+
+  private askForPermission(): boolean {
+    return window.confirm("Are you sure you want to delete rental?");
+  }
 }
