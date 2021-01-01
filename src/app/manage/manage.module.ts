@@ -7,6 +7,7 @@ import { ManageComponent } from "./manage.component";
 import { AuthGuard } from "../auth/shared/auth.guard";
 import { BookingListingComponent } from "./components/booking-listing/booking-listing.component";
 import { SharedRentalModule } from "../shared/modules/shared-rental.module";
+import { SharedModule } from "../shared/modules/shared.module";
 
 const routes: Routes = [
   {
@@ -34,6 +35,11 @@ const routes: Routes = [
     ManageComponent,
     BookingListingComponent,
   ],
-  imports: [CommonModule, SharedRentalModule, RouterModule.forChild(routes)],
+  imports: [
+    CommonModule,
+    SharedRentalModule,
+    SharedModule,
+    RouterModule.forChild(routes),
+  ],
 })
 export class ManageModule {}

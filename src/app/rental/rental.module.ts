@@ -12,10 +12,7 @@ import { RentalComponent } from "./rental.component";
 import { RentalSecretComponent } from "./rental-secret/rental-secret.component";
 import { AuthGuard } from "../auth/shared/auth.guard";
 
-import {
-  UppercasePipe,
-  FirstUpperLetterPipe,
-} from "../shared/pipes/uppercase.pipe";
+import { FirstUpperLetterPipe } from "../shared/pipes/uppercase.pipe";
 import {
   HighlightDirective,
   BwmNgIfDirective,
@@ -27,6 +24,7 @@ import { RentalNewComponent } from "./rental-new/rental-new.component";
 import { RentalBookingComponent } from "./components/rental-booking/rental-booking.component";
 import { RentalHomesComponent } from "./rental-homes/rental-homes.component";
 import { SharedRentalModule } from "../shared/modules/shared-rental.module";
+import { SharedModule } from "../shared/modules/shared.module";
 
 const routes: Routes = [
   {
@@ -63,7 +61,6 @@ const routes: Routes = [
     RentalDetailComponent,
     RentalListingComponent,
     RentalComponent,
-    UppercasePipe,
     FirstUpperLetterPipe,
     HighlightDirective,
     BwmNgIfDirective,
@@ -80,6 +77,7 @@ const routes: Routes = [
     MapModule,
     FormsModule,
     SharedRentalModule,
+    SharedModule,
     NgxDaterangepickerMd.forRoot(),
     NgxSmartModalModule.forChild(),
   ],

@@ -10,6 +10,7 @@ import { Booking } from "src/app/booking/shared/booking.model";
 export class BookingListingComponent implements OnInit {
   @Input("title") title: string;
   @Input("getBookings") getBookings: () => Observable<Booking[]>;
+  @Input("type") type: string;
 
   constructor() {}
   bookings: Booking[];
