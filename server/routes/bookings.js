@@ -4,7 +4,8 @@ const {
   createBooking,
   getBookings,
   getUserBookings,
-  getReceivedBookings
+  getReceivedBookings,
+  deleteBooking
 } = require('../controllers/bookings');
 const {
   isUserRentalOwner
@@ -20,4 +21,6 @@ router.get('/received', onlyAuthUser, getReceivedBookings);
 router.get('/me', onlyAuthUser, getUserBookings);
 router.post('', onlyAuthUser, isUserRentalOwner, createBooking);
 
+// DELETE: /api/v1/bookings/sad8797da98d79ds
+router.delete('/:bookingId', onlyAuthUser, deleteBooking);
 module.exports = router;
