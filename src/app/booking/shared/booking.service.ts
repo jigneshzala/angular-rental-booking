@@ -14,6 +14,13 @@ export class BookingService {
   getBookings(rentalId: string): Observable<Booking[]> {
     return this.http.get<Booking[]>(`/api/v1/bookings?rental=${rentalId}`);
   }
+  getAuthUserBookings(): Observable<Booking[]> {
+    return this.http.get<Booking[]>(`/api/v1/bookings/me`);
+  }
+
+  getReceivedBookings(): Observable<Booking[]> {
+    return this.http.get<Booking[]>(`/api/v1/bookings/received`);
+  }
   createBooking(booking: Booking): Observable<Booking> {
     return this.http
       .post<Booking>("/api/v1/bookings", booking)

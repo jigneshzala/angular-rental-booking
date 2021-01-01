@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
+import { Observable } from "rxjs";
+import { Booking } from "src/app/booking/shared/booking.model";
 
 @Component({
   selector: "app-booking-listing",
@@ -7,8 +9,14 @@ import { Component, Input, OnInit } from "@angular/core";
 })
 export class BookingListingComponent implements OnInit {
   @Input("title") title: string;
+  @Input("getBookings") getBookings: () => Observable<Booking[]>;
 
   constructor() {}
+  bookings: Booking[];
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getBookings().subscribe((bookings) => {
+      this.bookings = bookings;
+    });
+  }
 }
