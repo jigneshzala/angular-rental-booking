@@ -5,7 +5,8 @@ import { ManageBookingsComponent } from "./manage-bookings/manage-bookings.compo
 import { Routes, RouterModule } from "@angular/router";
 import { ManageComponent } from "./manage.component";
 import { AuthGuard } from "../auth/shared/auth.guard";
-import { BookingListingComponent } from './components/booking-listing/booking-listing.component';
+import { BookingListingComponent } from "./components/booking-listing/booking-listing.component";
+import { SharedRentalModule } from "../shared/modules/shared-rental.module";
 
 const routes: Routes = [
   {
@@ -33,6 +34,6 @@ const routes: Routes = [
     ManageComponent,
     BookingListingComponent,
   ],
-  imports: [CommonModule, RouterModule.forChild(routes)],
+  imports: [CommonModule, SharedRentalModule, RouterModule.forChild(routes)],
 })
 export class ManageModule {}

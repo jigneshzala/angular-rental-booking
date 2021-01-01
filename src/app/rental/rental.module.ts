@@ -9,7 +9,6 @@ import { NgxSmartModalModule } from "ngx-smart-modal";
 import { RentalDetailComponent } from "./rental-detail/rental-detail.component";
 import { RentalListingComponent } from "./rental-listing/rental-listing.component";
 import { RentalComponent } from "./rental.component";
-import { RentalCardComponent } from "../shared/rental-card/rental-card.component";
 import { RentalSecretComponent } from "./rental-secret/rental-secret.component";
 import { AuthGuard } from "../auth/shared/auth.guard";
 
@@ -27,6 +26,7 @@ import { RentalService } from "./shared/rental.service";
 import { RentalNewComponent } from "./rental-new/rental-new.component";
 import { RentalBookingComponent } from "./components/rental-booking/rental-booking.component";
 import { RentalHomesComponent } from "./rental-homes/rental-homes.component";
+import { SharedRentalModule } from "../shared/modules/shared-rental.module";
 
 const routes: Routes = [
   {
@@ -63,7 +63,6 @@ const routes: Routes = [
     RentalDetailComponent,
     RentalListingComponent,
     RentalComponent,
-    RentalCardComponent,
     UppercasePipe,
     FirstUpperLetterPipe,
     HighlightDirective,
@@ -80,6 +79,7 @@ const routes: Routes = [
     CommonModule,
     MapModule,
     FormsModule,
+    SharedRentalModule,
     NgxDaterangepickerMd.forRoot(),
     NgxSmartModalModule.forChild(),
   ],
