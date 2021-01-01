@@ -30,4 +30,7 @@ export class BookingService {
         )
       );
   }
+  deleteBooking(bookingId: String): Observable<any> {
+    return this.http.delete(`/api/v1/bookings/${bookingId}`);
+  }
 }

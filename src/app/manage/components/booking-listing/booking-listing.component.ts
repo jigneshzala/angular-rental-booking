@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
 import { Booking } from "src/app/booking/shared/booking.model";
+import { BookingService } from "src/app/booking/shared/booking.service";
 
 @Component({
   selector: "app-booking-listing",
@@ -12,12 +13,34 @@ export class BookingListingComponent implements OnInit {
   @Input("getBookings") getBookings: () => Observable<Booking[]>;
   @Input("type") type: string;
 
-  constructor() {}
+  constructor(private bookingService: BookingService) {}
+
   bookings: Booking[];
 
   ngOnInit() {
     this.getBookings().subscribe((bookings) => {
       this.bookings = bookings;
     });
+  }
+
+  deleteBooking(bookingId: string) {
+    const canDelete = this.askForPermission();
+    if (!canDelete) {
+      return;
+    }
+
+    this.bookingService.deleteBooking(bookingId).subscribe(
+      (_) => {
+        const index = this.bookings.findIndex((b) => b._id === bookingId);
+        this.bookings.splice(index, 1);
+
+        alert("Booking has been deleted!");
+      },
+      (_) => alert("Booking cannot be deleted!")
+    );
+  }
+
+  private askForPermission(): boolean {
+    return window.confirm("Are you sure you want to delete booking?");
   }
 }
